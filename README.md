@@ -34,6 +34,7 @@ addNumbers()
 Output of the above code will be
 
 > Inside 'if': 30
+>
 > Outside 'if': 30
 
 This output is obtained due to hoisting of `sum` variable to the top of `addNumbers` function.
@@ -65,6 +66,7 @@ console.log(a)
 Output of the above code will be
 
 > 20
+>
 > 20
 
 > NOTE: An important point to remember is that the JS Engine will search for variable `a` in the `function scope` first, if it is not found it will go the the nearest enclosing scope just above it. It does the same thing till it reaches the `global scope`.
@@ -108,8 +110,11 @@ console.log(name)
 Output of the above code will be
 
 > Program starts, at line 1
+>
 > Program continues, line 2
+>
 > Program continues, line 3
+>
 > Kiran
 
 More than the output, it is important to understand that the variable `name`, was in a `Temporal Dead Zone (TDZ)` till line 4, where it was declared and initialized. This would've been the same with `const` as well. But, with `var` it differs completely. If `var name` were used instead of `let name` / `const name`, then `name` would be available from line 1 itself.
@@ -208,6 +213,7 @@ fn()
 Output of the above code will be
 
 > 11 5
+>
 > 12 10
 
 `outerFunc` returns the `innerFunc` function. In this case, it has not only sent the definition of the `innerFunc`, but also all of the variables, arguments, and their state (See that first call to `fn` updates `argVar` to 11, and the second one uses this persisted value and updates to 12) that the `innerFunc` has access to (Here it is `argVar` and `counter` variable) in its scope.
@@ -241,8 +247,11 @@ fn2()
 Output of the above code will be
 
 > 11 5
+>
 > 12 10
+>
 > 11 5
+>
 > 12 10
 
 ##### Applications of Closures
@@ -319,6 +328,7 @@ console.log(value)
 Output of the above code will be
 
 > 15
+>
 > 15
 
 ##### Applications of Function Currying
@@ -445,7 +455,9 @@ invokingFunc.apply(thisArg, [argArray])
 Per MDN, this `argArray`'s length is capped arbitrarily at `65,636`. For more details, see [MDN documentation on `apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply#using_apply_and_built-in_functions)
 
 > Trick to REMEMBER what `call` and `apply` do, is to think of them as follows:
+>
 > `call` as a function that takes `comma` separated arguments and
+>
 > `apply` as a function that takes an `array` of arguments
 
 `bind` method is similar to `call`, except that it doesn't call the function right there (where it is declared), it returns a function which now has the context of what `thisArg` means, and it can be used to invoke at a later point.
@@ -525,7 +537,7 @@ REMEMBER: This only works with `var` and doesn't work with `let` / `const`
 1. 'new'
 2. Explicit
 3. Implicit
-4. Defalut
+4. Default
 
 ## Glossary
 
