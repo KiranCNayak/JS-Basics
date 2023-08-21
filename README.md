@@ -5,9 +5,9 @@ Quick Notes to prepare for JS heavy Interviews (like React and React Native)
 ## 1.1 Variables in JS
 
 |               |            var            |                                                                                                                        let                                                                                                                        |                                 const                                  |
-| :-----------: | :-----------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-|    Scoping    |      function scoped      |                                                                                                                   block scoped                                                                                                                    |                              block scoped                              |
-|   Hoisting    | hoisted — **_undefined_** |                                                                                                **ReferenceError** (if accessed before declaration)                                                                                                |        **ReferenceError**<br/>(if accessed before declaration)         |
+| ------------: | :-----------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+|       Scoping |      function scoped      |                                                                                                                   block scoped                                                                                                                    |                              block scoped                              |
+|      Hoisting | hoisted — **_undefined_** |                                                                                                **ReferenceError** (if accessed before declaration)                                                                                                |        **ReferenceError**<br/>(if accessed before declaration)         |
 | Other details |             —             | `let` begins declarations, not statements<br/>So we can't use a lone declaration as the<br/>body of a block. Ex: `if(true) let v1 = 1`<br/>will throw a **SyntaxError:** `Lexical declaration`<br/>`cannot applear in a single-statement context` | Must be initialized on declaration,<br/>can't re-assign with new value |
 
 #### Examples
@@ -89,6 +89,55 @@ Output of the above code will be
 
 Even though `profile` is declared with `const` type, its properties can be changed, as `profile` is storing the `reference of the object and not the value` directly. What is being changed is the data inside the object, so this is **_not an error_**.
 
+##### Temporal Dead Zone (TDZ)
+
+The space between the top of the scope till the place of declaration / initialization is called a TDZ. It is easier to demonstrate than explain.
+
+##### Example 1.1.4
+
+```javascript
+console.log("Program starts, at line 1")
+console.log("Program continues, line 2")
+console.log("Program continues, line 3")
+
+let name = "Kiran" // Same effect, even if you had used 'const'
+
+console.log(name)
+```
+
+Output of the above code will be
+
+> Program starts, at line 1
+> Program continues, line 2
+> Program continues, line 3
+> Kiran
+
+More than the output, it is important to understand that the variable `name`, was in a `Temporal Dead Zone (TDZ)` till line 4, where it was declared and initialized. This would've been the same with `const` as well. But, with `var` it differs completely. If `var name` were used instead of `let name` / `const name`, then `name` would be available from line 1 itself.
+
+It is also important to note that it is called "**_Temporal_** Dead Zone" because the zone depends on the order of execution (Time-based) rather than the order in which the code is written (Position-based). An example to illustrate this point:
+
+##### Example 1.1.5
+
+```javascript
+...
+{
+  // TDZ starts at beginning of scope
+  const func = () => console.log(letVariable) // OK
+
+  // Within the TDZ letVariable access throws `ReferenceError`
+
+  let letVariable = 3 // End of TDZ (for letVariable)
+  func() // Called outside TDZ!
+}
+...
+```
+
+Output of the above code will be
+
+> 3
+
+It should now be crystal clear, as to why it is **_Temporal_** Dead Zone (TDZ)
+
 If the interviewer asks which one would you use among `var` / `let` / `const`, say that you would prefer `const` in normal / default cases. If in case there is a need to change the value, choose `let`. Basically, avoid using `var`.
 
 ## 1.2 Scope in JS
@@ -132,14 +181,111 @@ Similarly, the engine checks if the variable `b` and `c` are available. The abov
 
 Now we need to understand about `Scope Chaining`. It is the union of currect scope and all the parent scopes that a function has access to. In the `Example 1.2.1` above, `inner` function has access to all variables `a`, `b` and `c`, due to scope chaining.
 
----
+## 1.3 Closures in JS
+
+Closure gives you access to an outer functions's scope from an inner function. In JS, Closures are created every time a function is created, at function creation time. Therefore, the combination of the function and its scope chain (lexical environment) is what is called a Closure in JS.
+
+##### Example 1.3.1
+
+```javascript
+function outerFunc(argVar) {
+  let counter = 0
+
+  function innerFunc() {
+    counter += 5
+
+    console.log(++argVar, counter)
+  }
+
+  return innerFunc
+}
+
+const fn = outerFunc(10)
+fn()
+fn()
+```
+
+Output of the above code will be
+
+> 11 5
+> 12 10
+
+`outerFunc` returns the `innerFunc` function. In this case, it has not only sent the definition of the `innerFunc`, but also all of the variables, arguments, and their state (See that first call to `fn` updates `argVar` to 11, and the second one uses this persisted value and updates to 12) that the `innerFunc` has access to (Here it is `argVar` and `counter` variable) in its scope.
+
+But if there are multiple closures, each of them holds a separate instance of a closure.
+
+##### Example 1.3.2
+
+```javascript
+function outerFunc(argVar) {
+  let counter = 0
+
+  function innerFunc() {
+    counter += 5
+
+    console.log(++argVar, counter)
+  }
+
+  return innerFunc
+}
+
+const fn1 = outerFunc(10)
+fn1()
+fn1()
+
+const fn2 = outerFunc(10)
+fn2()
+fn2()
+```
+
+Output of the above code will be
+
+> 11 5
+> 12 10
+> 11 5
+> 12 10
+
+##### Applications of Closures
+
+1. Utility functions that implement `memoization`
+2. Module Pattern which provides `data privacy`
+3. Throttle and Debounce functionality
+   > ```javascript
+   > // Throttle Functionality
+   > const throttle = (func, limit) => {
+   >   let isThrottling
+   >   return function () {
+   >     const args = arguments
+   >     const context = this
+   >     if (!isThrottling) {
+   >       func.apply(context, args)
+   >       isThrottling = true
+   >       setTimeout(() => (isThrottling = false), limit)
+   >     }
+   >   }
+   > }
+   >
+   > // Debounce
+   > const debounce = (func, delay) => {
+   >   let debouncing
+   >   return function () {
+   >     const context = this
+   >     const args = arguments
+   >     clearTimeout(debouncing)
+   >     debouncing = setTimeout(() => func.apply(context, args), delay)
+   >   }
+   > }
+   > ```
+4. Promises
 
 ## Glossary
 
-|     Term | Meaning / Other details                                                                                                                                       |
-| -------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Hoisting | Variable declarations are put into memory during the compile phase<br/>In simple words, Hoisting means moving variable declarations to the top of their scope |
-|    Scope | The scope is the current context of execution in which values and expressions are "visible" or can be referenced.                                             |
+|                     Term | Meaning / Other details                                                                                                                                                                                                   |
+| -----------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|                 Hoisting | Variable declarations are put into memory during the compile phase<br/>In simple words, Hoisting means moving variable declarations to<br/>the top of their scope.                                                        |
+|                    Scope | The scope is the current context of execution in which values and<br/>expressions are "visible" or can be referenced.                                                                                                     |
+|                  Closure | It is the combination of a function bundled together with references<br/>to its surrounding state (Lexical Environment)                                                                                                   |
+| Temporal Dead Zone (TDZ) | A variable declared with `let`, `const`, or `class` is said to be in a<br/>`"temporal dead zone" (TDZ)` from the start of the block, till code<br/>execution reaches the line where variable is declared and initialized. |
 
 ---
 
