@@ -821,6 +821,7 @@ Output of the above code will be
 > key: eatFood value: function (food = "Idli") {
 >
 > &nbsp;&nbsp;&nbsp;&nbsp;console.log(\`Eating ${food} 🍛\`)
+>
 > }
 
 ## Glossary
