@@ -1100,6 +1100,27 @@ mp.clear()
 console.log(mp.size) // Prints 0
 ```
 
+`To iterate` over K-V pairs, use **`forEach`** method of `Map`. It takes a function with 3 arguments where, **_`WEIRDLY`_**, `value` comes first, then the `key` and then the `map` on which it is iterating on. Each element is taken based on the **`INSERTION ORDER`**.
+
+```javascript
+function logMapElements(val, key, map) {
+  console.log(`m[${key}] = ${val}`)
+}
+new Map([
+  ["foo", 3],
+  ["bar", {}],
+  ["baz", undefined],
+]).forEach(logMapElements)
+```
+
+Output of the above code will be
+
+> `m[foo] = 3`
+>
+> `m[bar] = [object Object]`
+>
+> `m[baz] = undefined`
+
 `To iterate` over K-V pairs, use **`for...of`** construct.
 
 ```javascript
@@ -1113,7 +1134,20 @@ for (let [key, value] of mp) {
 }
 ```
 
-Output of the above code will be
+`To iterate` over K-V pairs, you can also use **`for...of`** construct on `entries()` method of `Map`, which returns a `map iterator` having `[key, value]` pair array for each element, in the **`INSERTION ORDER`**.
+
+```javascript
+const mp = new Map()
+
+mp.set("firstName", "Kiran")
+mp.set("lastName", "Nayak")
+
+for (let [key, value] of mp.entries()) {
+  console.log(key + ": " + value)
+}
+```
+
+Output of `both` the above codes will be
 
 > `firstName: Kiran`
 >
@@ -1203,6 +1237,16 @@ Reasons are listed below:
    > Map is an `Iterable`, so it can directly be iterated upon.
    >
    > Iterating over an `Object` needs a way to obtain its keys, then iterate over them.
+
+## 3.2 `Set` — Standard Object in JS
+
+A `Set` object in JS stores **`UNIQUE`** values of any type. So no repetition of values.
+
+To insert an element to a `Set`, use `add(<item>)` (This is different from the `set` method of `Map`).
+
+Almost all the methods and properties are similar to `Map`, like `size`, `has(<item>)`, `delete(<item>)`, `clear()`, `forEach()`, `entries()`, `keys()`, `values()`.
+
+> NOTE: `keys()` and `values()` in a `Set` return same values. Per MDN, `keys()` is an alias of `values()`
 
 ## Glossary
 
