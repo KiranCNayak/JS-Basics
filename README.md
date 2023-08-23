@@ -261,27 +261,27 @@ Output of the above code will be
 3. Throttle and Debounce functionality
    > ```javascript
    > // Throttle Functionality
-   > const throttle = (func, limit) => {
-   >   let isThrottling
+   > const throttle = (cbFunc, limit) => {
+   >   let isThrottling = false
    >   return function () {
-   >     const args = arguments
-   >     const context = this
    >     if (!isThrottling) {
-   >       func.apply(context, args)
+   >       cbFunc.apply(this, arguments)
    >       isThrottling = true
-   >       setTimeout(() => (isThrottling = false), limit)
+   >       setTimeout(() => {
+   >         isThrottling = false
+   >       }, limit)
    >     }
    >   }
    > }
    >
    > // Debounce
-   > const debounce = (func, delay) => {
+   > const debounce = (cbFunc, delay) => {
    >   let debouncing
    >   return function () {
-   >     const context = this
-   >     const args = arguments
    >     clearTimeout(debouncing)
-   >     debouncing = setTimeout(() => func.apply(context, args), delay)
+   >     debouncing = setTimeout(() => {
+   >       cbFunc.apply(this, arguments)
+   >     }, delay)
    >   }
    > }
    > ```
