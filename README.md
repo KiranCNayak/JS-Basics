@@ -16,19 +16,19 @@ Quick Notes to prepare for JS heavy Interviews (like React and React Native)
 
 ```javascript
 function addNumbers() {
-  var a = 10
-  var b = 20
+  var a = 10;
+  var b = 20;
 
   // Random condition check
   if (b > a) {
-    var sum = a + b
-    console.log("Inside 'if': ", sum)
+    var sum = a + b;
+    console.log("Inside 'if': ", sum);
   }
 
-  console.log("Outside 'if': ", sum)
+  console.log("Outside 'if': ", sum);
 }
 
-addNumbers()
+addNumbers();
 ```
 
 Output of the above code will be
@@ -52,15 +52,15 @@ If you replace `var` with `let` / `const` (As part of ES6 (2015) specification),
 ##### Example 1.1.2
 
 ```javascript
-var a = 10
+var a = 10;
 
 function func() {
-  var a = 20
-  console.log(a)
+  var a = 20;
+  console.log(a);
 }
 
-func()
-console.log(a)
+func();
+console.log(a);
 ```
 
 Output of the above code will be
@@ -75,14 +75,14 @@ Output of the above code will be
 
 ```javascript
 const profile = {
-  name: "Kiran",
-  college: "BMSCE",
-  gradSubject: "CSE",
-  location: "Bengaluru",
-}
+  name: 'Kiran',
+  college: 'BMSCE',
+  gradSubject: 'CSE',
+  location: 'Bengaluru',
+};
 
-profile.name = "Kiran Nayak"
-console.log(profile.name)
+profile.name = 'Kiran Nayak';
+console.log(profile.name);
 ```
 
 Output of the above code will be
@@ -98,13 +98,13 @@ The space between the top of the scope till the place of declaration / initializ
 ##### Example 1.1.4
 
 ```javascript
-console.log("Program starts, at line 1")
-console.log("Program continues, line 2")
-console.log("Program continues, line 3")
+console.log('Program starts, at line 1');
+console.log('Program continues, line 2');
+console.log('Program continues, line 3');
 
-let name = "Kiran" // Same effect, even if you had used 'const'
+let name = 'Kiran'; // Same effect, even if you had used 'const'
 
-console.log(name)
+console.log(name);
 ```
 
 Output of the above code will be
@@ -145,7 +145,26 @@ It should now be crystal clear, as to why it is **_Temporal_** Dead Zone (TDZ)
 
 If the interviewer asks which one would you use among `var` / `let` / `const`, say that you would prefer `const` in normal / default cases. If in case there is a need to change the value, choose `let`. Basically, avoid using `var`.
 
-## 1.2 Scope in JS
+## 1.2 Types in JS
+
+There are two types of values in JS. They are:
+
+1. Primitive types — like `string`, `boolean`, `number`, `symbol`, `undefined`, `null`. These are immutable, i.e., Read-only and can't be changed.
+
+##### Example 1.2.1
+
+```javascript
+let name = 'Kiran';
+name.toLowerCase();
+console.log(name); // still capital-K "Kiran"
+
+name = name.toLowerCase();
+console.log(name); // now it's "kiran"
+```
+
+2. All other types are clubbed into `object` type — like `object`, `array`, `function`, and other data structures like `Map` and `Set`. These are mutable, i.e., they can be changed.
+
+## 1.3 Scope in JS
 
 There are 4 kinds of Scopes in JS.
 
@@ -160,18 +179,18 @@ There is another concept of `Lexical Scoping` which is used by the `Parser` to r
 
 `Lexical scoping` refers to the location where a variable is declared within the source code to determine where that variable is available. If there are nested functions, JS Engine for variable lookup starts with the inner function where we are trying to access the variable and moves outward until it reaches the global scope.
 
-##### Example 1.2.1
+##### Example 1.3.1
 
 ```javascript
-const a = 10
+const a = 10;
 
 function exampleFunc() {
-  const b = 20
+  const b = 20;
 
   function inner() {
-    const c = 30
+    const c = 30;
 
-    console.log(a, b, c)
+    console.log(a, b, c);
   }
 }
 ```
@@ -186,28 +205,28 @@ Similarly, the engine checks if the variable `b` and `c` are available. The abov
 
 Now we need to understand about `Scope Chaining`. It is the union of currect scope and all the parent scopes that a function has access to. In the `Example 1.2.1` above, `inner` function has access to all variables `a`, `b` and `c`, due to scope chaining.
 
-## 1.3 Closures in JS
+## 1.4 Closures in JS
 
 Closure gives you access to an outer functions's scope from an inner function. In JS, Closures are created every time a function is created, at function creation time. Therefore, the combination of the function and its scope chain (lexical environment) is what is called a Closure in JS.
 
-##### Example 1.3.1
+##### Example 1.4.1
 
 ```javascript
 function outerFunc(argVar) {
-  let counter = 0
+  let counter = 0;
 
   function innerFunc() {
-    counter += 5
+    counter += 5;
 
-    console.log(++argVar, counter)
+    console.log(++argVar, counter);
   }
 
-  return innerFunc
+  return innerFunc;
 }
 
-const fn = outerFunc(10)
-fn()
-fn()
+const fn = outerFunc(10);
+fn();
+fn();
 ```
 
 Output of the above code will be
@@ -220,28 +239,28 @@ Output of the above code will be
 
 But if there are multiple closures, each of them holds a separate instance of a closure.
 
-##### Example 1.3.2
+##### Example 1.4.2
 
 ```javascript
 function outerFunc(argVar) {
-  let counter = 0
+  let counter = 0;
 
   function innerFunc() {
-    counter += 5
+    counter += 5;
 
-    console.log(++argVar, counter)
+    console.log(++argVar, counter);
   }
 
-  return innerFunc
+  return innerFunc;
 }
 
-const fn1 = outerFunc(10)
-fn1()
-fn1()
+const fn1 = outerFunc(10);
+fn1();
+fn1();
 
-const fn2 = outerFunc(10)
-fn2()
-fn2()
+const fn2 = outerFunc(10);
+fn2();
+fn2();
 ```
 
 Output of the above code will be
@@ -262,33 +281,33 @@ Output of the above code will be
    > ```javascript
    > // Throttle Functionality
    > const throttle = (cbFunc, limit) => {
-   >   let isThrottling = false
+   >   let isThrottling = false;
    >   return function () {
    >     if (!isThrottling) {
-   >       cbFunc.apply(this, arguments)
-   >       isThrottling = true
+   >       cbFunc.apply(this, arguments);
+   >       isThrottling = true;
    >       setTimeout(() => {
-   >         isThrottling = false
-   >       }, limit)
+   >         isThrottling = false;
+   >       }, limit);
    >     }
-   >   }
-   > }
+   >   };
+   > };
    >
    > // Debounce
    > const debounce = (cbFunc, delay) => {
-   >   let debouncing
+   >   let debouncing;
    >   return function () {
-   >     clearTimeout(debouncing)
+   >     clearTimeout(debouncing);
    >     debouncing = setTimeout(() => {
-   >       cbFunc.apply(this, arguments)
-   >     }, delay)
-   >   }
-   > }
+   >       cbFunc.apply(this, arguments);
+   >     }, delay);
+   >   };
+   > };
    > ```
 4. Promises
 5. Function Currying
 
-## 1.4 Function Currying in JS
+## 1.5 Function Currying in JS
 
 Currying is the process in `Functional Programming` in which we transform a function with multiple arguments into a sequence of nesting functions that take one arguement at a time.
 
@@ -296,33 +315,33 @@ That is to say, we transform a function `func(a, b, c)` to `func(a)(b)(c)`
 
 Currying doesn't call the function, it simply transforms it.
 
-##### Example 1.4.1
+##### Example 1.5.1
 
 ```javascript
 function sumOf3Nos(a, b, c) {
-  return a + b + c
+  return a + b + c;
 }
 
 function func(cbFunc) {
   return function (a) {
     return function (b) {
       return function (c) {
-        return cbFunc(a, b, c)
-      }
-    }
-  }
+        return cbFunc(a, b, c);
+      };
+    };
+  };
 }
 
-const curriedFunc = func(sumOf3Nos)
-console.log(curriedFunc(4)(5)(6))
+const curriedFunc = func(sumOf3Nos);
+console.log(curriedFunc(4)(5)(6));
 
 // Above code returns the same as following result, but is extra verbose
-const funcA = func(sumOf3Nos)
-const funcB = funcA(4)
-const funcC = funcB(5)
-const value = funcC(6)
+const funcA = func(sumOf3Nos);
+const funcB = funcA(4);
+const funcC = funcB(5);
+const value = funcC(6);
 
-console.log(value)
+console.log(value);
 ```
 
 Output of the above code will be
@@ -339,13 +358,13 @@ Output of the above code will be
    > function log(date, imp_level, msg) {
    >   console.log(
    >     `[${date.getHours()}:${date.getMinutes()}] [${imp_level}] ${msg}`,
-   >   )
+   >   );
    > }
    >
    > // Logger is used by passing three parameters
-   > log(new Date())("INFO")("function took 2500ms to finish...")
-   > log(new Date())("WARN")("variable declared, but not used...")
-   > log(new Date())("ERROR")("Some error occured...")
+   > log(new Date())('INFO')('function took 2500ms to finish...');
+   > log(new Date())('WARN')('variable declared, but not used...');
+   > log(new Date())('ERROR')('Some error occured...');
    >
    > // While the above code is useful, we are sending some parameters unnecessarily.
    > // If we make use of function currying, we can create modular functions that have
@@ -355,23 +374,106 @@ Output of the above code will be
    >   return function (date) {
    >     return function (imp_level) {
    >       return function (msg) {
-   >         return cbFunc(date, imp_level, msg)
-   >       }
-   >     }
-   >   }
+   >         return cbFunc(date, imp_level, msg);
+   >       };
+   >     };
+   >   };
    > }
    >
-   > const curriedLog = curry(log)
-   > curriedLog(new Date())("INFO")("function took 2500ms to finish...") // Same as previous usage
+   > const curriedLog = curry(log);
+   > curriedLog(new Date())('INFO')('function took 2500ms to finish...'); // Same as previous usage
    >
-   > const logNow = curriedLog(new Date())
-   > logNow("WARN")("variable declared, but not used...") // Because of currying we created a custom logNow function
+   > const logNow = curriedLog(new Date());
+   > logNow('WARN')('variable declared, but not used...'); // Because of currying we created a custom logNow function
    >
-   > const logErrorNow = logNow("ERROR")
-   > logErrorNow("Some error occured...") // Here we only sent last argument as first two are already sent
+   > const logErrorNow = logNow('ERROR');
+   > logErrorNow('Some error occured...'); // Here we only sent last argument as first two are already sent
    > ```
 
    Note that `logNow`, `logErrorNow` are just two examples of a large set of functions that can be created using currying.
+
+## 1.6 Immutability in JS
+
+[Look at this link for full description](https://daveceddia.com/react-redux-immutability-guide) -> `Very well written`
+
+Some languages are not at all mutable. Meaning, they cannot change the value of a variable once assigned.
+
+JS is part mutable and part immutable. Some `array` operations in JS, return a new array after doing the operation, like `Array.prototype.slice()` method, which is basically immutability in action. Similarly, `Array.prototype.sort()` is done in place, so it is mutable operation.
+
+> EXTRA: Mutable methods of Array
+>
+> push(\<item\>) — adds an item to the end of the array
+>
+> pop() — removes an item from the end of the array
+>
+> shift() — adds an item to the start of the array
+>
+> unshift(\<item\>) — adds an item to the start of the array
+>
+> sort()
+>
+> reverse()
+>
+> splice()
+
+##### Example 1.6.1
+
+```javascript
+const person = {
+  name: 'Kiran',
+  college: 'BMSCE',
+  address: 'KA, India',
+};
+
+const addSpecialPowers = target => {
+  target.specialPower = 'Invisibility';
+  return target;
+};
+
+const samePerson = addSpecialPowers(person);
+
+console.log(person.specialPower);
+console.log(samePerson.specialPower);
+
+console.log(person === samePerson);
+```
+
+Output of the above code will be
+
+> Invisibility
+>
+> Invisibility
+>
+> true
+
+As we can see, the original `person` object has been tampered with, that is it has `mutated`.
+
+How do we know they are both the same object ?
+
+`Ans`: The last console log is showing the result needed.
+
+To not have these kind of changes, we need to follow some rules to make functions, `pure`.
+
+##### Rules of immutability
+
+1. A pure function must always return the same value when given the same inputs.
+
+2. A pure function must not have any side effects.
+
+Now, to change the above code to have immutability and `addSpecialPowers` to be a `Pure Function`, we need to make the following changes.
+
+```javascript
+// Same as before, so not repeating
+function giveAwesomePowers(person) {
+  let newPerson = {
+    ...person,
+    specialPower: 'invisibility',
+  };
+
+  return newPerson;
+}
+// Same as before, so not repeating
+```
 
 ## 2.1 _this_ in JS
 
@@ -386,13 +488,13 @@ Functions in JS are invoked in one of 4 different ways of binding.
 
 ```javascript
 const person = {
-  name: "Kiran",
+  name: 'Kiran',
   greet() {
-    console.log(`Hi ${this.name}!`)
+    console.log(`Hi ${this.name}!`);
   },
-}
+};
 
-person.greet() // 'this' keyword is referencing the 'person' object implicitly
+person.greet(); // 'this' keyword is referencing the 'person' object implicitly
 ```
 
 `this.name` will be considered as `person.name` and the output will be `Hi Kiran!`
@@ -409,35 +511,35 @@ There are 3 methods of `Function` to do explicit binding in JS. They are:
 
 ```javascript
 const person = {
-  name: "Kiran",
-}
+  name: 'Kiran',
+};
 function greet() {
-  console.log(`Hi ${this.name}!`)
+  console.log(`Hi ${this.name}!`);
 }
 
-greet.call(person)
+greet.call(person);
 ```
 
 Here, `greet` function's `this` object is explicitly bound to `person` context.
 
 ```javascript
 // syntax of call method of Function
-invokingFunc.call(thisArg)
-invokingFunc.call(thisArg, arg1)
-invokingFunc.call(thisArg, arg1, /*...,*/ argN)
+invokingFunc.call(thisArg);
+invokingFunc.call(thisArg, arg1);
+invokingFunc.call(thisArg, arg1, /*...,*/ argN);
 ```
 
 Examples with arguments to call method
 
 ```javascript
 const person = {
-  name: "Kiran",
-}
+  name: 'Kiran',
+};
 function greet(hobby1, hobby2) {
-  console.log(`Hi ${this.name}! Your hobbies are ${hobby1} and ${hobby2}`)
+  console.log(`Hi ${this.name}! Your hobbies are ${hobby1} and ${hobby2}`);
 }
 
-greet.call(person, "Cricket", "Badminton") // 'call' method takes 'thisArg' as first argument, where we have passed 'person'
+greet.call(person, 'Cricket', 'Badminton'); // 'call' method takes 'thisArg' as first argument, where we have passed 'person'
 ```
 
 Output of the above code will be
@@ -448,8 +550,8 @@ Output of the above code will be
 
 ```javascript
 // syntax of apply method of Function
-invokingFunc.apply(thisArg)
-invokingFunc.apply(thisArg, [argArray])
+invokingFunc.apply(thisArg);
+invokingFunc.apply(thisArg, [argArray]);
 ```
 
 Per MDN, this `argArray`'s length is capped arbitrarily at `65,636`. For more details, see [MDN documentation on `apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply#using_apply_and_built-in_functions)
@@ -464,15 +566,15 @@ Per MDN, this `argArray`'s length is capped arbitrarily at `65,636`. For more de
 
 ```javascript
 const person = {
-  name: "Kiran",
-}
+  name: 'Kiran',
+};
 
 function greet(hobby1, hobby2) {
-  console.log(`Hi ${this.name}! Your hobbies are ${hobby1} and ${hobby2}`)
+  console.log(`Hi ${this.name}! Your hobbies are ${hobby1} and ${hobby2}`);
 }
 
-const greetKiran = greet.bind(person, "Cricket", "Badminton")
-greetKiran() // A re-usable function that is being used here
+const greetKiran = greet.bind(person, 'Cricket', 'Badminton');
+greetKiran(); // A re-usable function that is being used here
 ```
 
 ##### 3. 'new' binding
@@ -481,11 +583,11 @@ It is similar to how we use `new` keyword in `Java`.
 
 ```javascript
 function Person(name) {
-  this.name = name
+  this.name = name;
 }
 
-const person1 = new Person("Kiran")
-const person1 = new Person("Kumar")
+const person1 = new Person('Kiran');
+const person1 = new Person('Kumar');
 ```
 
 When we invoke a function with `new` keyword, JS under the hood will create a new empty object which the `this` keyword references. So it is as though :
@@ -493,10 +595,10 @@ When we invoke a function with `new` keyword, JS under the hood will create a ne
 ```javascript
 function Person(name) {
   // this = {}  --> whenever you use 'new', an empty `this` object is created under the hood
-  this.name = name // Now, populate the empty 'this' object with a name property having value as 'Kiran', if you consider the next line
+  this.name = name; // Now, populate the empty 'this' object with a name property having value as 'Kiran', if you consider the next line
 }
 
-const person1 = new Person("Kiran")
+const person1 = new Person('Kiran');
 ```
 
 ##### 4. Default binding
@@ -505,10 +607,10 @@ It is the fallback when none of the other three rules are matched. JS will defau
 
 ```javascript
 function greet() {
-  console.log(`Hi ${this.name}`)
+  console.log(`Hi ${this.name}`);
 }
 
-greet()
+greet();
 ```
 
 Output of the above code will be
@@ -518,12 +620,12 @@ Output of the above code will be
 JS tried to search for name in global scope, and since it didn't find any variable with `name` identifier, it defaulted to `undefined`. In case there were a variable with the name as `name`, it would be used, even though it was not bound to the function's context Implicitly / Explicitly / using a 'new' keyword.
 
 ```javascript
-var name = "Kiran"
+var name = 'Kiran';
 function greet() {
-  console.log(`Hi ${this.name}`)
+  console.log(`Hi ${this.name}`);
 }
 
-greet()
+greet();
 ```
 
 Output of the above code will be
@@ -544,48 +646,48 @@ REMEMBER: This only works with `var` and doesn't work with `let` / `const`
 Consider you have to create a `person` object that holds `name` and some associated methods with it, similar to what is described below.
 
 ```javascript
-let person = {}
+let person = {};
 
-person.name = "Kiran"
+person.name = 'Kiran';
 
 person.greet = function () {
-  console.log(`Hi ${this.name}!`)
-}
+  console.log(`Hi ${this.name}!`);
+};
 
 person.talk = function () {
-  console.log("Talking")
-}
+  console.log('Talking');
+};
 
 person.eatFood = function (food) {
-  console.log(`Eating ${food}`)
-}
+  console.log(`Eating ${food}`);
+};
 ```
 
 If you need to make it a bit more re-usable, you should convert it into a function (basically an object factory / similar to a class in Java) and call it each time you need a new `Person`, as shown below.
 
 ```javascript
 function Person(name) {
-  let person = {}
+  let person = {};
 
-  person.name = name
+  person.name = name;
 
   person.greet = function () {
-    console.log(`Hi ${this.name}!`)
-  }
+    console.log(`Hi ${this.name}!`);
+  };
 
   person.talk = function () {
-    console.log("Talking")
-  }
+    console.log('Talking');
+  };
 
   person.eatFood = function (food) {
-    console.log(`Eating ${food}`)
-  }
-  return person
+    console.log(`Eating ${food}`);
+  };
+  return person;
 }
 
-const personKiran = Person("Kiran")
-const personKumar = Person("Kumar")
-const personVarun = Person("Varun")
+const personKiran = Person('Kiran');
+const personKumar = Person('Kumar');
+const personVarun = Person('Varun');
 ```
 
 There is a downside to this, since the `greet`, `talk`, `eatFood` methods are created for each of these objects, and allocated memory separately. But it is evident from the definition of these methods that it is generic enough to separate them out of `Person`, into a new `personMethods` object, and `Person` function can be re-written as follows.
@@ -671,48 +773,48 @@ In JS, every function has a property called `prototype`. We can make use of it t
 
 ```javascript
 Person.prototype.greet = function () {
-  console.log(`Hi ${this.name}`)
-}
+  console.log(`Hi ${this.name}`);
+};
 
 Person.prototype.talk = function () {
-  console.log("Talking")
-}
+  console.log('Talking');
+};
 
 Person.prototype.eatFood = function (food) {
-  console.log(`Eating ${food}`)
-}
+  console.log(`Eating ${food}`);
+};
 
 function Person(name) {
-  let person = Object.create(Person.prototype)
-  person.name = name
+  let person = Object.create(Person.prototype);
+  person.name = name;
 
-  return person
+  return person;
 }
 
-const personKiran = Person("Kiran")
+const personKiran = Person('Kiran');
 ```
 
 There is one more optimization that can be done, which uses `new` keyword. If you use `new` keyword to initialize a person, then you wouldn't even have to create & return an object. `new` does it under the hood.
 
 ```javascript
 Person.prototype.greet = function () {
-  console.log(`Hi ${this.name}`)
-}
+  console.log(`Hi ${this.name}`);
+};
 
 Person.prototype.talk = function () {
-  console.log("Talking")
-}
+  console.log('Talking');
+};
 
 Person.prototype.eatFood = function (food) {
-  console.log(`Eating ${food}`)
-}
+  console.log(`Eating ${food}`);
+};
 
 // Since this function is invoked with the 'new' keyword, it is called a 'constructor' function
 function Person(name) {
-  this.name = name
+  this.name = name;
 }
 
-const personKiran = new Person("Kiran") // Using 'new' makes it have all methods associated with 'Person' prototype.
+const personKiran = new Person('Kiran'); // Using 'new' makes it have all methods associated with 'Person' prototype.
 ```
 
 > IMPORTANT: There is no prototype for arrow functions
@@ -832,25 +934,25 @@ Say you need a `Programmer` function that has methods and properties similar to 
 
 ```javascript
 function Programmer(name, language) {
-  this.name = name // This is created as a property of Programmer (Obviously!)
-  this.language = language
+  this.name = name; // This is created as a property of Programmer (Obviously!)
+  this.language = language;
 }
 
 Programmer.prototype.greet = function () {
-  console.log(`Hi ${this.name}`)
-}
+  console.log(`Hi ${this.name}`);
+};
 
 Programmer.prototype.eat = function (food) {
-  console.log(`Eating ${food}`)
-}
+  console.log(`Eating ${food}`);
+};
 
 Programmer.prototype.talk = function () {
-  console.log("Talking")
-}
+  console.log('Talking');
+};
 
 Programmer.prototype.code = function () {
-  console.log(`Coding in ${this.language} language`)
-}
+  console.log(`Coding in ${this.language} language`);
+};
 ```
 
 Since we already have a `Person` object that takes in a property `name` and has the same three methods, we can make use of Inheritance here.
@@ -867,8 +969,8 @@ To set the value of name to the `Programmer` we use `Explicit binding` to send t
 ```javascript
 function Programmer(name, language) {
   // this.name = name  // Instead of setting a new 'name' property to 'Programmer', initialize 'name' to 'Person'
-  Person.call(this, name) // Passing name as argument to initialize a new 'Person', but with 'Programmer' context
-  this.language = language
+  Person.call(this, name); // Passing name as argument to initialize a new 'Person', but with 'Programmer' context
+  this.language = language;
 }
 ```
 
@@ -876,17 +978,17 @@ Now we need to setup the prototypes properly, making `Person` as the fallback pr
 
 ```javascript
 function Programmer(name, language) {
-  Person.call(this, name)
-  this.language = language
+  Person.call(this, name);
+  this.language = language;
 }
 
-Programmer.prototype = Object.create(Person.prototype)
+Programmer.prototype = Object.create(Person.prototype);
 
 // IMPORTANT: You must initialize 'code' method on Programmer's prototype ONLY AFTER the previous line (that is after Object.create is invoked)
 //  If you do it before, it will not have 'code' as a member method, as 'Object.create' overrides the content of Programmer.prototype.
 Programmer.prototype.code = function () {
-  console.log(`Coding in ${this.language} language`)
-}
+  console.log(`Coding in ${this.language} language`);
+};
 ```
 
 Basically, we have now wired `Person` to be the fallback prototype to be searched, on a failed lookup of a property / method of `Programmer`. Say, you access a property `age` on an object created with `new` keyword on `Programmer`. JS Engine searches that object first, if there is no such property then `Programmer` prototype is looked up. If it also doesn't have the property, JS Engine goes on to check `Person` prototype (This is because of `Object.create` wiring that was done previously). If it also doesn't have the property, JS Engine goes on doing the same till it reaches `Object` object. If `Object` also doesn't have that property, then JS Engine calls off, and the value is set as `undefined`.
@@ -938,24 +1040,24 @@ Therefore, it is better to directly convert the existing code in `Prototypal Inh
 
 ```javascript
 function Person(name) {
-  this.name = name
+  this.name = name;
 }
 
 Person.prototype.greet = function () {
-  console.log(`Hi ${this.name}`)
-}
+  console.log(`Hi ${this.name}`);
+};
 
 Person.prototype.talk = function () {
-  console.log("Talking")
-}
+  console.log('Talking');
+};
 
 Person.prototype.eatFood = function (food) {
-  console.log(`Eating ${food}`)
-}
+  console.log(`Eating ${food}`);
+};
 
-const personKiran = new Person("Kiran")
-const personKumar = new Person("Kumar")
-const personVarun = new Person("Varun")
+const personKiran = new Person('Kiran');
+const personKumar = new Person('Kumar');
+const personVarun = new Person('Varun');
 ```
 
 **`It changes to the following using Classes`**
@@ -963,25 +1065,25 @@ const personVarun = new Person("Varun")
 ```javascript
 class Person {
   constructor(name) {
-    this.name = name
+    this.name = name;
   }
 
   greet() {
-    console.log(`Hi ${this.name}`)
+    console.log(`Hi ${this.name}`);
   }
 
   talk() {
-    console.log("Talking")
+    console.log('Talking');
   }
 
   eatFood(food) {
-    console.log(`Eating ${food}`)
+    console.log(`Eating ${food}`);
   }
 }
 
-const personKiran = new Person("Kiran")
-const personKumar = new Person("Kumar")
-const personVarun = new Person("Varun")
+const personKiran = new Person('Kiran');
+const personKumar = new Person('Kumar');
+const personVarun = new Person('Varun');
 ```
 
 Similarly let us change the definition of Programmer constructor function as well.
@@ -990,19 +1092,19 @@ Similarly let us change the definition of Programmer constructor function as wel
 
 ```javascript
 function Programmer(name, language) {
-  Person.call(this, name)
-  this.language = language
+  Person.call(this, name);
+  this.language = language;
 }
 
-Programmer.prototype = Object.create(Person.prototype)
+Programmer.prototype = Object.create(Person.prototype);
 
 Programmer.prototype.code = function () {
-  console.log(`Coding in ${this.language} language`)
-}
+  console.log(`Coding in ${this.language} language`);
+};
 
-Programmer.prototype.constructor = Programmer
+Programmer.prototype.constructor = Programmer;
 
-const programmerKiran = new Programmer("Kiran", "Javascript")
+const programmerKiran = new Programmer('Kiran', 'Javascript');
 ```
 
 **`It changes to the following using Classes`**
@@ -1012,16 +1114,16 @@ const programmerKiran = new Programmer("Kiran", "Javascript")
 //  even though concept is not same as in Java
 class Programmer extends Person {
   constructor(name, language) {
-    super(name)
-    this.language = language
+    super(name);
+    this.language = language;
   }
 
   code() {
-    console.log(`Coding in ${this.language} language`)
+    console.log(`Coding in ${this.language} language`);
   }
 }
 
-const programmerKiran = new Programmer("Kiran", "Javascript")
+const programmerKiran = new Programmer('Kiran', 'Javascript');
 ```
 
 ## 3.1 `Map` — Standard Object in JS
@@ -1029,88 +1131,88 @@ const programmerKiran = new Programmer("Kiran", "Javascript")
 `Map` object in JS holds Key-Value pairs similar to an object. It is declared as follows.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 ```
 
 `To add` K-V pairs we use the **`set`** `method`, by passing key and value as arguments.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 ```
 
 `To get` the value use the **`get`** `method`, by passing key as argument.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
-console.log(mp.get("firstName")) // Obviously prints 'Kiran'
+console.log(mp.get('firstName')); // Obviously prints 'Kiran'
 ```
 
 `To get` the size of the map use **`size`** `property`. Re-iterating again, **`size`** is a `property`.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
-console.log(mp.size) // Prints 2
+console.log(mp.size); // Prints 2
 ```
 
 `To see` if map has a `property` given in the argument, use the **`has`** method.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
-console.log(mp.has("firstName")) // Prints true
-console.log(mp.has("fullName")) // Prints false
+console.log(mp.has('firstName')); // Prints true
+console.log(mp.has('fullName')); // Prints false
 ```
 
 `To delete` a K-V pair from the map, use **`delete`** method, by passing key as argument. It returns `true` if the `key` that was passed existed in the map, otherwise returns `false`.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
-console.log(mp.delete("firstName")) // Prints true
-console.log(mp.delete("fullName")) // Prints false
+console.log(mp.delete('firstName')); // Prints true
+console.log(mp.delete('fullName')); // Prints false
 ```
 
 `To delete` all K-V pairs from the map, use **`clear`** method.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
-mp.clear()
+mp.clear();
 
-console.log(mp.size) // Prints 0
+console.log(mp.size); // Prints 0
 ```
 
 `To iterate` over K-V pairs, use **`forEach`** method of `Map`. It takes a function with 3 arguments where, **_`WEIRDLY`_**, `value` comes first, then the `key` and then the `map` on which it is iterating on. Each element is taken based on the **`INSERTION ORDER`**.
 
 ```javascript
 function logMapElements(val, key, map) {
-  console.log(`m[${key}] = ${val}`)
+  console.log(`m[${key}] = ${val}`);
 }
 new Map([
-  ["foo", 3],
-  ["bar", {}],
-  ["baz", undefined],
-]).forEach(logMapElements)
+  ['foo', 3],
+  ['bar', {}],
+  ['baz', undefined],
+]).forEach(logMapElements);
 ```
 
 Output of the above code will be
@@ -1124,26 +1226,26 @@ Output of the above code will be
 `To iterate` over K-V pairs, use **`for...of`** construct.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
 for (let [key, value] of mp) {
-  console.log(key + ": " + value)
+  console.log(key + ': ' + value);
 }
 ```
 
 `To iterate` over K-V pairs, you can also use **`for...of`** construct on `entries()` method of `Map`, which returns a `map iterator` having `[key, value]` pair array for each element, in the **`INSERTION ORDER`**.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
 for (let [key, value] of mp.entries()) {
-  console.log(key + ": " + value)
+  console.log(key + ': ' + value);
 }
 ```
 
@@ -1156,13 +1258,13 @@ Output of `both` the above codes will be
 `To iterate` over only the Keys, use **`for...of`** construct on `keys` method of map.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
 for (let key of mp.keys()) {
-  console.log(key)
+  console.log(key);
 }
 ```
 
@@ -1175,13 +1277,13 @@ Output of the above code will be
 `To iterate` over only the Values, use **`for...of`** construct on `values` method of map.
 
 ```javascript
-const mp = new Map()
+const mp = new Map();
 
-mp.set("firstName", "Kiran")
-mp.set("lastName", "Nayak")
+mp.set('firstName', 'Kiran');
+mp.set('lastName', 'Nayak');
 
 for (let value of mp.values()) {
-  console.log(value)
+  console.log(value);
 }
 ```
 
@@ -1194,20 +1296,20 @@ Output of the above code will be
 ##### Converting `Map` to `Array` and vice versa
 
 ```javascript
-const personMap = new Map()
+const personMap = new Map();
 
-personMap.set("firstName", "Kiran")
-personMap.set("lastName", "Nayak")
+personMap.set('firstName', 'Kiran');
+personMap.set('lastName', 'Nayak');
 
-const personArray = Array.from(personMap)
+const personArray = Array.from(personMap);
 ```
 
 ```javascript
 const personArray = [
-  ["firstName", "Kiran"],
-  ["lastName", "Nayak"],
-]
-const personMap = new Map(personArray)
+  ['firstName', 'Kiran'],
+  ['lastName', 'Nayak'],
+];
+const personMap = new Map(personArray);
 ```
 
 ##### Obvious Question: Why use `Map` when there is `Object` already ?
@@ -1251,16 +1353,16 @@ Almost all the methods and properties are similar to `Map`, like `size`, `has(<i
 `To iterate` over the values of a `Set`, use **`for...of`** construct.
 
 ```javascript
-const st = new Set()
+const st = new Set();
 
-st.add("Red")
-st.add("Red") // This element won't be inserted
-st.add("Blue")
-st.add("Green")
-st.add("Yellow")
+st.add('Red');
+st.add('Red'); // This element won't be inserted
+st.add('Blue');
+st.add('Green');
+st.add('Yellow');
 
 for (let value of st) {
-  console.log(value)
+  console.log(value);
 }
 ```
 
@@ -1277,19 +1379,19 @@ Output of the above code will be
 ##### Converting `Set` to `Array` and vice versa
 
 ```javascript
-const colorSet = new Set()
+const colorSet = new Set();
 
-colorSet.add("Red")
-colorSet.add("Blue")
-colorSet.add("Green")
-colorSet.add("Yellow")
+colorSet.add('Red');
+colorSet.add('Blue');
+colorSet.add('Green');
+colorSet.add('Yellow');
 
-const colorArray = [...colorSet]
+const colorArray = [...colorSet];
 ```
 
 ```javascript
-const colorArray = ["Red", "Blue", "Green", "Yellow"] // It will also remove any duplicates, if present.
-const colorSet = new Map(colorArray)
+const colorArray = ['Red', 'Blue', 'Green', 'Yellow']; // It will also remove any duplicates, if present.
+const colorSet = new Map(colorArray);
 ```
 
 ## 3.3 Iterables and Iterators in JS (Introduced in `ES6` Specification)
@@ -1321,22 +1423,22 @@ this `for...of` loop construct is easy to use and implement over the built-in ob
 ```javascript
 // To access each character in a string
 for (const ch of str) {
-  console.log(ch)
+  console.log(ch);
 }
 
 // To access each item in an array
 for (const item of array) {
-  console.log(item)
+  console.log(item);
 }
 
 // To access each K-V pair in a map
 for (const [key, val] of mMap) {
-  console.log(`${key}: ${val}`)
+  console.log(`${key}: ${val}`);
 }
 
 // To access each element in a set
 for (const elem of mSet) {
-  console.log(elem)
+  console.log(elem);
 }
 ```
 
@@ -1346,22 +1448,22 @@ REMEMBER: `Objects` in JS are **_NOT_** `Iterable` by default. We can make an ob
 const obj = {
   // Every 'iterable' must have a Symbol called 'iterator'
   [Symbol.iterator]: function () {
-    let step = 0
+    let step = 0;
     const iterator = {
       next: function () {
-        step++
+        step++;
         switch (step) {
           case 1:
-            return { value: "Hello", done: false }
+            return { value: 'Hello', done: false };
           case 2:
-            return { value: "World", done: false }
+            return { value: 'World', done: false };
           default:
-            return { value: undefined, done: true }
+            return { value: undefined, done: true };
         }
       },
-    }
+    };
   },
-}
+};
 ```
 
 You can create a custom iterable that gives a range of numbers from `1` to `max` (specified by you).
@@ -1370,18 +1472,18 @@ You can create a custom iterable that gives a range of numbers from `1` to `max`
 const range = function (max) {
   return {
     [Symbol.iterator]: function () {
-      let idx = 0
+      let idx = 0;
       return {
         next: function () {
-          return { value: ++idx, done: idx === max + 1 }
+          return { value: ++idx, done: idx === max + 1 };
         },
-      }
+      };
     },
-  }
-}
+  };
+};
 
 for (const a of range(10)) {
-  console.log(a)
+  console.log(a);
 }
 ```
 
@@ -1391,31 +1493,67 @@ for (const a of range(10)) {
 const range = function (max) {
   return {
     [Symbol.iterator]: function () {
-      let idx = 0
+      let idx = 0;
       return {
         next: function () {
-          return { value: ++idx, done: idx === max + 1 }
+          return { value: ++idx, done: idx === max + 1 };
         },
         // This is not Compulsory
         return: function () {
           return {
             done: true,
-          }
+          };
         },
-      }
+      };
     },
-  }
-}
+  };
+};
 
 for (const a of range(10)) {
-  console.log(a)
-  if (a === 5) break
+  console.log(a);
+  if (a === 5) break;
 }
 ```
 
 > Similarly there is an optional `throw` property as well.
 >
 > See [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) if you need more info on `Iteration Protocols`.
+
+`React` and `React Native` probable Interview Questions
+
+> var, let, const (Similarities and Differences)
+>
+> Spread operator
+>
+> Closures
+>
+> Shallow Copy and Deep Copy
+>
+> Class Components vs Functional Components (Pros & Cons)
+>
+> Promises vs async / await
+>
+> React.memo
+>
+> Hooks
+>
+> Custom Hooks
+>
+> (Difference between useState and useRef, and difference between useCallback and useMemo)
+>
+> When not to use Hooks
+>
+> Disadvantages of Hooks
+>
+> React.memo and others
+>
+> Context API
+>
+> Redux
+>
+> Implementation Question asked — return an object with frequency of all characters in a String
+>
+> Implementation Question asked — Implement infinite scroll in React Native as soon as user reaches the end of FlatList.
 
 ## Glossary
 
@@ -1430,7 +1568,7 @@ for (const a of range(10)) {
 
 ## Sources
 
-|      Topic | Source Link                                                                                              |
-| ---------: | :------------------------------------------------------------------------------------------------------- |
-| Javascript | [MDN](https://developer.mozilla.org/docs/Web)<br/>[Codevolution Course](https://learn.codevolution.dev/) |
-|   Markdown | [Markdown Guide](https://www.markdownguide.org/basic-syntax)                                             |
+|      Topic | Source Link                                                                                                                                                                      |
+| ---------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Javascript | [MDN](https://developer.mozilla.org/docs/Web)<br/>[Codevolution Course](https://learn.codevolution.dev/)<br/>[Dave Ceddia's Blog](https://daveceddia.com/javascript-references/) |
+|   Markdown | [Markdown Guide](https://www.markdownguide.org/basic-syntax)                                                                                                                     |
