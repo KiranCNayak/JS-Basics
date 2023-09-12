@@ -1523,11 +1523,19 @@ for (const a of range(10)) {
 
 > var, let, const (Similarities and Differences)
 >
+> Strongly typed vs Weakly typed languages
+>
+> Why is JS weakly typed (Is there a reason why it was intentionally made weakly typed)
+>
+> [Advantage of Weak typing over strong typing](stackoverflow.com/questions/6944522/advantages-of-weak-typing-over-strong-typing)
+>
 > Spread operator
 >
-> Closures
+> Closures (Remember a real world example for this. It will be useful!)
 >
 > Shallow Copy and Deep Copy
+>
+> Advantages of JSX
 >
 > Class Components vs Functional Components (Pros & Cons)
 >
@@ -1568,7 +1576,7 @@ for (const a of range(10)) {
 
 ## Sources
 
-|      Topic | Source Link                                                                                                                                                                      |
-| ---------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Javascript | [MDN](https://developer.mozilla.org/docs/Web)<br/>[Codevolution Course](https://learn.codevolution.dev/)<br/>[Dave Ceddia's Blog](https://daveceddia.com/javascript-references/) |
-|   Markdown | [Markdown Guide](https://www.markdownguide.org/basic-syntax)                                                                                                                     |
+|      Topic | Source Link                                                                                                                                                                                                                                                                                                      |
+| ---------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Javascript | [MDN](https://developer.mozilla.org/docs/Web)<br/>[Codevolution Course](https://learn.codevolution.dev/)<br/>[Dave Ceddia's Blog](https://daveceddia.com/javascript-references/)<br/>[Vasanth Bhat's Medium Blog](https://mevasanth.medium.com/)<br/>[Vasanth Bhat's YT](https://www.youtube.com/@uncommongeeks) |
+|   Markdown | [Markdown Guide](https://www.markdownguide.org/basic-syntax)                                                                                                                                                                                                                                                     |
