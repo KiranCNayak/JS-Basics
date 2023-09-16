@@ -2,7 +2,7 @@
 
 Quick Notes to prepare for JS heavy Interviews (like React and React Native)
 
-Table of Contents
+## Table of Contents
 
 [0.0 — Interview Questions](./0_0%20—%20Interview%20Questions/interview_questions.readme.md)
 
