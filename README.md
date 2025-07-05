@@ -4,33 +4,43 @@ Quick Notes to prepare for JS heavy Interviews (like React and React Native)
 
 ## Table of Contents
 
-[0.0 — Interview Questions](./0_0%20—%20Interview%20Questions/interview_questions.readme.md)
+### Very Important
 
-[1.1 — Variables](./1_1%20—%20Variables/variables.readme.md)
+- [Interview Questions](./JS%20Related/Interview%20Questions/interview_questions.readme.md)
 
-[1.2 — Types](./1_2%20—%20Types/types.readme.md)
+### Javascript
 
-[1.3 — Scope](./1_3%20—%20Scope/scope.readme.md)
+- [Variables](./JS%20Related/Variables/variables.readme.md)
 
-[1.4 — Closures](./1_4%20—%20Closures/closures.readme.md)
+- [Types](./JS%20Related/Types/types.readme.md)
 
-[1.5 — Function Currying](./1_5%20—%20Function%20Currying/function_currying.readme.md)
+- [Scope](./JS%20Related/Scope/scope.readme.md)
 
-[1.6 — Immutability](./1_6%20—%20Immutability/immutability.readme.md)
+- [Closures](./JS%20Related/Closures/closures.readme.md)
 
-[2.1 — this](./2_1%20—%20this/this.readme.md)
+- [Function Currying](./JS%20Related/Function%20Currying/function_currying.readme.md)
 
-[2.2 — Prototype](./2_2%20—%20Prototype/prototype.readme.md)
+- [Immutability](./JS%20Related/Immutability/immutability.readme.md)
 
-[2.3 — Prototypal Inheritance](./2_3%20—%20Prototypal%20Inheritance/prototypal_inheritance.readme.md)
+- [this](./JS%20Related/this/this.readme.md)
 
-[2.4 — Classes](./2_4%20—%20Classes/classes.readme.md)
+- [Prototype](./JS%20Related/Prototype/prototype.readme.md)
 
-[3.1 — Map Object](./3_1%20—%20Map%20Object/map_object.readme.md)
+- [Prototypal Inheritance](./JS%20Related/Prototypal%20Inheritance/prototypal_inheritance.readme.md)
 
-[3.2 — Set Object](./3_2%20—%20Set%20Object/set_object.readme.md)
+- [Classes](./JS%20Related/Classes/classes.readme.md)
 
-[3.3 — Iterables and Iterators](./3_3%20—%20Iterables%20and%20Iterators/iterables_and_iterators.readme.md)
+- [Map Object](./JS%20Related/Map%20Object/map_object.readme.md)
+
+- [Set Object](./JS%20Related/Set%20Object/set_object.readme.md)
+
+- [Iterables and Iterators](./JS%20Related/Iterables%20and%20Iterators/iterables_and_iterators.readme.md)
+
+### HTML
+
+- [Semantic HTML]()
+
+- [Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
 
 ## Glossary
 
